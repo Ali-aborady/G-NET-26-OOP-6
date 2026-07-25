@@ -3,6 +3,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Data.Common;
+using System.Net.Sockets;
 using System.Numerics;
 using System.Reflection.Emit;
 using System.Reflection.Metadata;
@@ -201,49 +202,49 @@ namespace OOP_6
             //a) What is a partial class? Why would a developer split Calculator into two files?
             //Apartial class allows us to split one class into multiple files.
 
-                 //All parts must:
+            //All parts must:
 
-                 //- Use the `partial` keyword.
-                 //- Have the same class name.
-                 //- Be in the same namespace.
+            //- Use the `partial` keyword.
+            //- Have the same class name.
+            //- Be in the same namespace.
 
-                 //The compiler combines all parts into one class at compile time.
+            //The compiler combines all parts into one class at compile time.
 
-                 // Why Split `Calculator` into Two Files?
+            // Why Split `Calculator` into Two Files?
 
-                 //To separate responsibilities:
+            //To separate responsibilities:
 
-                 //- "Calculator.cs" contains the main logic.
-                 //- "Calculator.Logging.cs" contains logging or diagnostic code.
+            //- "Calculator.cs" contains the main logic.
+            //- "Calculator.Logging.cs" contains logging or diagnostic code.
 
-                 //This makes the project easier to organize and maintain.
+            //This makes the project easier to organize and maintain.
             //b) What is a partial method? What happens if the OnCalculated() implementation in 
             //Calculator.Logging.cs is deleted — will the code still compile? Why? 
 
-                //A partial method is a method declared in one part of a partial class and optionally implemented in another part.
+            //A partial method is a method declared in one part of a partial class and optionally implemented in another part.
 
-                //If the implementation of `OnCalculated()` is deleted, the code will still compile.
+            //If the implementation of `OnCalculated()` is deleted, the code will still compile.
 
-                //The compiler simply removes the call to the partial method.
+            //The compiler simply removes the call to the partial method.
 
-                //So this line:
+            //So this line:
 
-                //OnCalculated(LastResult);
+            //OnCalculated(LastResult);
 
-                //will be ignored if no implementation exists.
+            //will be ignored if no implementation exists.
             //c) What is an extension method? What are the three rules for writing one? 
-                //An extension method  is a static method that adds new functionality to an existing type without changing its original code.
-                
-                //It looks like an instance method when called.
-                
-                // Rules for Extension Methods
-                
-                //1.It must be inside a static class.
-                //2. It must be a static method.
-                //3. The first parameter must use the `this` keyword.
-                
-                //Example:
-                //publicstaticstringToCurrency(thisdoublevalue)
+            //An extension method  is a static method that adds new functionality to an existing type without changing its original code.
+
+            //It looks like an instance method when called.
+
+            // Rules for Extension Methods
+
+            //1.It must be inside a static class.
+            //2. It must be a static method.
+            //3. The first parameter must use the `this` keyword.
+
+            //Example:
+            //publicstaticstringToCurrency(thisdoublevalue)
 
             //d) What will the following code print? 
             //=======================================================================================
@@ -251,31 +252,86 @@ namespace OOP_6
             //        double result = calc.Add(19.5, 0.5);
             //        Console.WriteLine(result.ToCurrency());
             //=======================================================================================
-                //Log: result = 20
-                //$20.00
-                
-                // Explanation
-                
-                
-                //calc.Add(19.5, 0.5)
-                
-                //sets "LastResult" to `20`.
-                
-                //Then:
-                
-                //OnCalculated(20)
-                
-                //prints:
-                
-                //Log: result = 20
-                
-                //Finally:
-                
-                //result.ToCurrency()
-                
-                //formats the value as:
-                
-                //$20.00
+            //Log: result = 20
+            //$20.00
+
+            // Explanation
+
+
+            //calc.Add(19.5, 0.5)
+
+            //sets "LastResult" to `20`.
+
+            //Then:
+
+            //OnCalculated(20)
+
+            //prints:
+
+            //Log: result = 20
+
+            //Finally:
+
+            //result.ToCurrency()
+
+            //formats the value as:
+
+            //$20.00
+            #endregion
+
+            #region Part 02: Practical — Full Solution Code
+
+            //Cinema cinema = new Cinema("Route Cinema");
+
+            //cinema.OpenCinema();
+
+            //Console.WriteLine();
+
+            //Console.WriteLine("// Ticket t = new Ticket(\"Test\", 100); // ERROR: Cannot create instance of abstract type 'Ticket'");
+
+            //Console.WriteLine();
+
+            //var std = new StandardTicket("Inception", 80, "A5");
+            //var vip = new VIPTicket("Avengers", 200, true);
+            //var imax = new IMAXTicket("Dune", 100, true);
+
+            //std.Book();
+            //vip.Book();
+            //imax.Book();
+
+            //cinema.AddTicket(std);
+            //cinema.AddTicket(vip);
+            //cinema.AddTicket(imax);
+
+            //cinema.PrintAllTickets();
+
+            //Console.WriteLine();
+
+            //Console.WriteLine("--- Polymorphism: Final Price per Ticket ---");
+
+            //Ticket[] allTickets = { std, vip, imax };
+
+            //foreach (Ticket ticket in allTickets)
+            //{
+            //    Console.WriteLine($"{ticket.GetType().Name} => Final Price: {ticket.CalculateFinalPrice():F2}");
+            //}
+
+            //Console.WriteLine();
+
+            //Console.WriteLine("--- Extension Method: Receipt ---");
+
+            //Console.WriteLine(vip.ToReceipt());
+
+            //Console.WriteLine();
+
+            //Console.WriteLine("--- Extension Method: Total Revenue ---");
+
+            //Console.WriteLine($"Total Revenue: {allTickets.TotalRevenue():F2}");
+
+            //Console.WriteLine();
+
+            //cinema.CloseCinema();
+
             #endregion
         }
     }
